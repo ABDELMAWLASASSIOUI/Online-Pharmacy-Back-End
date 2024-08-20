@@ -15,14 +15,17 @@ public class CategorieService {
     public Categorie createCategorie(Categorie categorie){
         return categorieRepository.save(categorie);
     }
-    public Categorie updateCategorie(Long id,Categorie categorie) //not work
-    {
-        if(categorieRepository.existsById(id)){
-            categorie.setId(id);
-            return categorieRepository.save(categorie);
+    public Categorie updateCategorie(Long id, Categorie categorie) {
+        Optional<Categorie> existingCategorie = categorieRepository.findById(id);
+        if (existingCategorie.isPresent()) {
+            Categorie updatedCategorie = existingCategorie.get();
+            updatedCategorie.setName(categorie.getName());
+            return categorieRepository.save(updatedCategorie);
+        } else {
+            throw new RuntimeException("Categorie not found with id: " + id);
         }
-        return null;
     }
+
     public void deleteCategorie(Long id) {
         categorieRepository.deleteById(id);
     }

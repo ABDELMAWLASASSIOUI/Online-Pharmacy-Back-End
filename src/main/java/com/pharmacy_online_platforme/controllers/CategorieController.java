@@ -27,11 +27,17 @@ public class CategorieController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 
     }
-    @PutMapping("/admin/updateById/categories/{id}")
-    public ResponseEntity<Categorie> updateCategorie(@PathVariable Long id, @RequestBody Categorie categorie) {
-        Categorie updatedCategorie = categorieService.updateCategorie(id, categorie);
-        return updatedCategorie != null ? ResponseEntity.ok(updatedCategorie) : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    @PutMapping("/admin/updateById/categories/{id}")//is work
+    public ResponseEntity<String> updateCategorie(@PathVariable Long id, @RequestBody Categorie categorie) {
+        try {
+            Categorie updatedCategorie = categorieService.updateCategorie(id, categorie);
+            return ResponseEntity.ok("La catégorie a été mise à jour avec succès : " + updatedCategorie.getName());
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Erreur : La catégorie avec l'identifiant " + id + " n'a pas été trouvée.");
+        }
     }
+
     @DeleteMapping("/admin/deleteById/categories/{id}")
     public ResponseEntity<Void> deleteCategorie(@PathVariable Long id) {
         categorieService.deleteCategorie(id);
