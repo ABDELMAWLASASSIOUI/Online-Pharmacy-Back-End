@@ -24,7 +24,7 @@ public class PanierService {
     private PanierItemRepository panierItemRepository;
     @Autowired
     private AuthRepo authRepo;
-    public Panier addItemToPanier(Long panierId, Long produitId, int quantity) {
+    public Panier addItemToPanier(Long panierId, Long produitId, int quantity) { //is work
         if (panierId == null || produitId == null) {
             throw new IllegalArgumentException("The given id must not be null");
         }
@@ -54,7 +54,7 @@ public class PanierService {
 
     */
    public Panier createPanier(Long userId) {
-       Optional<Panier> existingPanier = panierRepository.findByUserId(userId);
+       Optional<Panier> existingPanier = panierRepository.findByUserId(userId);//the reson of content OneTonOne
        if (existingPanier.isPresent()) {
            // Panier déjà existant, vous pouvez lancer une exception ou simplement retourner le panier existant
            throw new IllegalArgumentException("Le panier pour l'utilisateur avec ID " + userId + " existe déjà.");
@@ -99,5 +99,13 @@ public class PanierService {
         }
     }
 
+    public Panier getPanierById(Long panierId) {
+        Optional<Panier> optionalPanier = panierRepository.findById(panierId);
+        if (optionalPanier.isPresent()) {
+            return optionalPanier.get();
+        } else {
+            throw new RuntimeException("Panier non trouvé avec l'ID " + panierId);
+        }
+    }
 
 }

@@ -72,5 +72,14 @@ public class PanierController {
         logger.info("Total price for Panier ID " + id + " is " + totalPrice);
         return ResponseEntity.ok(totalPrice);
     }
+    @GetMapping("/user/get/panier/{id}")
+    public ResponseEntity<Panier> getPanier(@PathVariable Long id) {
+        try {
+            Panier panier = panierService.getPanierById(id);
+            return ResponseEntity.ok(panier);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
 
 }

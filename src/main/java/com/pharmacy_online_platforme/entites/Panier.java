@@ -25,6 +25,7 @@ public class Panier {
     public double getTotalPrice() {
         return items.stream().mapToDouble(PanierItem::getTotalPrice).sum();
     }
+
 // @JsonManagedReference et @JsonBackReference sont utilisés ensemble pour éviter les boucles infinies dans les relations bidirectionnelles.
     // @JsonManagedReference(value = "panier-panierItem")//éviter des boucles infinies lors de la sérialisation de relations parents-enfants dans les objets Java en JSON
 }
