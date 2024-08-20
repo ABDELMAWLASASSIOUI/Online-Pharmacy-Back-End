@@ -3,6 +3,7 @@ package com.pharmacy_online_platforme.services;
 import com.pharmacy_online_platforme.entites.Panier;
 import com.pharmacy_online_platforme.entites.PanierItem;
 import com.pharmacy_online_platforme.entites.Produit;
+import com.pharmacy_online_platforme.repositories.AuthRepo;
 import com.pharmacy_online_platforme.repositories.PanierItemRepository;
 import com.pharmacy_online_platforme.repositories.PanierRepository;
 import com.pharmacy_online_platforme.repositories.ProduitRepository;
@@ -21,6 +22,8 @@ public class PanierService {
     private PanierRepository panierRepository;
     @Autowired
     private PanierItemRepository panierItemRepository;
+    @Autowired
+    private AuthRepo authRepo;
     public Panier addItemToPanier(Long panierId, Long produitId, int quantity) {
         if (panierId == null || produitId == null) {
             throw new IllegalArgumentException("The given id must not be null");
@@ -45,9 +48,22 @@ public class PanierService {
 
         return null;
     }
-    public Panier createPanier(Panier panier) {
+   /* public Panier createPanier(Panier panier) {
         return panierRepository.save(panier);
     }
+
+    */
+   public Panier createPanier(Long userId) {
+       Optional<Panier> existingPanier = panierRepository.findByUserId(userId);
+       if (existingPanier.isPresent()) {
+           // Panier déjà existant, vous pouvez lancer une exception ou simplement retourner le panier existant
+           throw new IllegalArgumentException("Le panier pour l'utilisateur avec ID " + userId + " existe déjà.");
+       }
+       Panier newPanier = new Panier();
+       newPanier.setUser(authRepo.findById(Math.toIntExact(userId)).orElseThrow());
+       return panierRepository.save(newPanier);
+   }
+
 
     //remove Item
     @Transactional

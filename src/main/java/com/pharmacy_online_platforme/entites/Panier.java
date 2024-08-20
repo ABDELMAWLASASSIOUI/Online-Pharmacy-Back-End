@@ -20,10 +20,11 @@ public class Panier {
     private User user;
 
     @OneToMany(mappedBy = "panier",cascade = CascadeType.ALL)
-    @JsonManagedReference//éviter des boucles infinies lors de la sérialisation de relations parents-enfants dans les objets Java en JSON
+    @JsonIgnore
     private List<PanierItem> items;
     public double getTotalPrice() {
         return items.stream().mapToDouble(PanierItem::getTotalPrice).sum();
     }
 // @JsonManagedReference et @JsonBackReference sont utilisés ensemble pour éviter les boucles infinies dans les relations bidirectionnelles.
+    // @JsonManagedReference(value = "panier-panierItem")//éviter des boucles infinies lors de la sérialisation de relations parents-enfants dans les objets Java en JSON
 }

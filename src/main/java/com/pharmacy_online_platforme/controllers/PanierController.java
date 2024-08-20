@@ -32,10 +32,26 @@ public class PanierController {
         }
     }
     @PostMapping("/user/add/panier")
+    public ResponseEntity<String> createPanier(@RequestParam Long userId) {
+        try {
+            Panier panier = panierService.createPanier(userId);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Panier créé avec succès");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    }
+    /*
     public ResponseEntity<Panier> createPanier(@RequestBody Panier panier) {
         Panier createdPanier = panierService.createPanier(panier);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPanier);
     }
+
+     */
 
 
     @DeleteMapping("/user/delete/item/{itemId}")

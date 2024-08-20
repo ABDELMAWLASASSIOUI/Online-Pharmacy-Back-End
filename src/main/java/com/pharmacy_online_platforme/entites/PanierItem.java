@@ -1,6 +1,7 @@
 package com.pharmacy_online_platforme.entites;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,10 +20,11 @@ public class PanierItem {
     private Produit produit;
     @ManyToOne
     @JoinColumn(name = "panier_id")
-    @JsonBackReference//evite le bouclage
+    @JsonIgnore
     private Panier panier;
     private int quantity;
     public double getTotalPrice() {
         return produit.getPrice() * quantity;
     }
+    //  @JsonBackReference(value = "panier-panierItem")
 }
