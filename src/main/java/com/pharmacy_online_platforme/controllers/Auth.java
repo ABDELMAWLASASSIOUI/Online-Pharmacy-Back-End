@@ -2,12 +2,17 @@ package com.pharmacy_online_platforme.controllers;
 
 import com.pharmacy_online_platforme.dto.ReqRes;
 import com.pharmacy_online_platforme.services.AuthService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -28,5 +33,18 @@ public class Auth {
         return ResponseEntity.ok(authService.refreshToken(refreshTokenRequest));
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<Map<String, String>> logout(HttpServletRequest request) {
+        String token = request.getHeader("Authorization");
+
+        SecurityContextHolder.clearContext();//efface le contexte de sécurité actuel
+        request.getSession().invalidate();
+
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "You have successfully logged out.");
+        response.put("token", token != null ? token : "No token provided");
+
+        return ResponseEntity.ok(response);
+    }
 
 }
