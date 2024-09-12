@@ -35,6 +35,17 @@ public class AdminUserInitializer {
 
                 ourUserRepo.save(adminUser);
             }
+            if (!ourUserRepo.findByEmail("nabil@ump.ac.ma").isPresent()) {
+                // Create the admin user directly
+                User adminUser = new User();
+                adminUser.setEmail("nabil@ump.ac.ma");
+                adminUser.setPassword(passwordEncoder.encode("123456789"));
+                // adminUser.setBirth_date(LocalDate.of(1990, 1, 1));
+                adminUser.setAddress("6000 Oujda Avenue");
+                adminUser.setRole("USER");
+
+                ourUserRepo.save(adminUser);
+            }
 
         };
     }

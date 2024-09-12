@@ -17,10 +17,9 @@ public class Panier {
     private Long id;
     @OneToOne
     @JoinColumn(name = "user_id")
+    @JsonManagedReference // Ajoutez cette ligne pour gérer la sérialisation
     private User user;
-
     @OneToMany(mappedBy = "panier",cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<PanierItem> items;
     public double getTotalPrice() {
         return items.stream().mapToDouble(PanierItem::getTotalPrice).sum();

@@ -1,5 +1,6 @@
 package com.pharmacy_online_platforme.controllers;
 
+import com.pharmacy_online_platforme.dto.PanierDTO;
 import com.pharmacy_online_platforme.entites.Panier;
 import com.pharmacy_online_platforme.entites.PanierAddResquest;
 import com.pharmacy_online_platforme.services.PanierService;
@@ -32,9 +33,9 @@ public class PanierController {
         }
     }
     @PostMapping("/user/add/panier")
-    public ResponseEntity<String> createPanier(@RequestParam Long userId) {
+    public ResponseEntity<String> createPanier(@RequestBody PanierDTO panierDTO) {
         try {
-            Panier panier = panierService.createPanier(userId);
+            PanierDTO panierDTO1 = panierService.createPanierDTO(panierDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body("Panier créé avec succès");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
@@ -65,14 +66,14 @@ public class PanierController {
     }
     private static final Logger logger = Logger.getLogger(PanierController.class.getName());
 
-    @GetMapping("/user/get/totalPrice/{id}")
+    @GetMapping("/user/get/totalPriceOfOnePanier/{id}")
     public ResponseEntity<Double> getTotalPrice(@PathVariable Long id) {
         logger.info("Calculating total price for Panier ID " + id);
         double totalPrice = panierService.calculerTotalPrixPanier(id);
         logger.info("Total price for Panier ID " + id + " is " + totalPrice);
         return ResponseEntity.ok(totalPrice);
     }
-    @GetMapping("/user/get/panier/{id}")
+   /* @GetMapping("/user/get/panier/{id}")
     public ResponseEntity<Panier> getPanier(@PathVariable Long id) {
         try {
             Panier panier = panierService.getPanierById(id);
@@ -81,5 +82,21 @@ public class PanierController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+
+    */
+   @GetMapping("/user/get/panier/{id}")
+   public ResponseEntity<Panier> getPanier(@PathVariable Long id) {
+       try {
+           Panier panier = panierService.getPanierById(id);
+           if (panier.getUser() == null) {
+               return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+           }
+           return ResponseEntity.ok(panier);
+       } catch (RuntimeException e) {
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+       }
+   }
+
+
 
 }

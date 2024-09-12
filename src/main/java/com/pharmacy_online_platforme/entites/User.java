@@ -1,5 +1,6 @@
 package com.pharmacy_online_platforme.entites;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,6 +24,9 @@ public class User implements UserDetails {
     private Date birth_date;
     private String name;
     private String role;
+    @OneToOne(mappedBy = "user")
+    @JsonBackReference // Ajoutez cette ligne pour éviter une boucle infinie
+    private Panier panier;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role));

@@ -1,8 +1,10 @@
 package com.pharmacy_online_platforme.services;
 
+import com.pharmacy_online_platforme.dto.PanierDTO;
 import com.pharmacy_online_platforme.entites.Panier;
 import com.pharmacy_online_platforme.entites.PanierItem;
 import com.pharmacy_online_platforme.entites.Produit;
+import com.pharmacy_online_platforme.entites.User;
 import com.pharmacy_online_platforme.repositories.AuthRepo;
 import com.pharmacy_online_platforme.repositories.PanierItemRepository;
 import com.pharmacy_online_platforme.repositories.PanierRepository;
@@ -64,6 +66,21 @@ public class PanierService {
        return panierRepository.save(newPanier);
    }
 
+   public PanierDTO createPanierDTO(PanierDTO panierDTO)
+   {
+       Panier panier=new Panier();
+       User user=authRepo.findById(panierDTO.getUserId()).orElseThrow(()->new RuntimeException("the id of user not existe"));
+       panier.setUser(user);
+       panierRepository.save(panier);
+       return convertDTO(panier);
+   }
+   public PanierDTO convertDTO(Panier panier)
+   {
+       PanierDTO panierDTO=new PanierDTO();
+       panierDTO.setUserId(panier.getUser().getId());
+       return panierDTO;
+   }
+
 
     //remove Item
     @Transactional
@@ -98,8 +115,8 @@ public class PanierService {
             return 0.0;
         }
     }
-
-    public Panier getPanierById(Long panierId) {
+//get:user,product,pricetotale
+   /* public Panier getPanierById(Long panierId) {
         Optional<Panier> optionalPanier = panierRepository.findById(panierId);
         if (optionalPanier.isPresent()) {
             return optionalPanier.get();
@@ -107,5 +124,26 @@ public class PanierService {
             throw new RuntimeException("Panier non trouvé avec l'ID " + panierId);
         }
     }
+
+    */
+public Panier getPanierById(Long id) {
+    Optional<Panier> optionalPanier = panierRepository.findById(id);
+    if (optionalPanier.isPresent()) {
+        Panier panier = optionalPanier.get();
+        // Assurez-vous que l'utilisateur est chargé (si nécessaire, utilisez fetch join ou EntityGraph)
+        if (panier.getUser() != null) {
+            // L'utilisateur est chargé correctement
+            return panier;
+        }
+    }
+    throw new RuntimeException("Panier not found");
+}
+
+
+
+    /*public Panier getPanierByIdN(Long panierId)
+    {
+
+    }*/
 
 }
