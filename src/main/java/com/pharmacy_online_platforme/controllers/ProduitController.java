@@ -1,5 +1,6 @@
 package com.pharmacy_online_platforme.controllers;
 
+import com.pharmacy_online_platforme.dto.ProductDTO;
 import com.pharmacy_online_platforme.entites.Produit;
 import com.pharmacy_online_platforme.services.ProduitService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class ProduitController {
  private ProduitService produitService;
 
     @PostMapping("/admin/add/product")
-    public ResponseEntity<Produit> createProduit(@RequestBody Produit produit) {
-        Produit createdProduit = produitService.createProduit(produit);
+    public ResponseEntity<ProductDTO> createProduit(@RequestBody ProductDTO produit) {
+        ProductDTO createdProduit = produitService.createProduit(produit);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProduit);
     }
 
@@ -45,15 +46,13 @@ public class ProduitController {
                 .body("Produit supprimé avec succès : ID " + id);
     }
     @PutMapping("/admin/updateById/product/{id}")//is work
-    public ResponseEntity<Produit> updateProduit(@PathVariable Long id, @RequestBody Produit produit) {
-        if (!produitService.existsById(id)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(null); // Optionnel : retourner un corps vide pour indiquer que le produit n'existe pas
-        }
+    public ResponseEntity<ProductDTO> updateProduit(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
+        ProductDTO productDTO1=produitService.updateProduct(id, productDTO);
+        return ResponseEntity.ok(productDTO1);
 
-        produit.setId(id);
-        Produit updatedProduit = produitService.updateProduit(produit);
-        return ResponseEntity.status(HttpStatus.OK).body(updatedProduit);
+
+
     }
 
-}
+
+    }
