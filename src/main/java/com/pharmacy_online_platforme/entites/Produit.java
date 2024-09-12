@@ -22,4 +22,7 @@ public class Produit {
     @JoinColumn(name = "categorie_id", nullable = false)
     @JsonBackReference
     private Categorie categorie;
+    @OneToOne
+    @JoinColumn(name = "image_id")  // Colonne qui contient l'ID de l'image associée
+    private Image image;  // Chaque profil a une image unique associée
 }

@@ -2,6 +2,7 @@ package com.pharmacy_online_platforme.services;
 
 import com.pharmacy_online_platforme.dto.ProductDTO;
 import com.pharmacy_online_platforme.entites.Categorie;
+import com.pharmacy_online_platforme.entites.Image;
 import com.pharmacy_online_platforme.entites.Produit;
 import com.pharmacy_online_platforme.repositories.CategorieRepository;
 import com.pharmacy_online_platforme.repositories.ProduitRepository;
@@ -18,6 +19,8 @@ public class ProduitService {
     private ProduitRepository produitRepository;
     @Autowired
     private CategorieRepository categorieRepository;
+    @Autowired
+    private ImageService imageService;
 
     public ProductDTO createProduit(ProductDTO productDTO) {
         Produit produit=new Produit();
@@ -25,6 +28,8 @@ public class ProduitService {
         produit.setPrice(productDTO.getPrice());
         Categorie categorie=categorieRepository.findById(productDTO.getCategoryId()).orElseThrow(()-> new RuntimeException("Categorie not found"));
          produit.setCategorie(categorie);
+        Image image=imageService.getImage(productDTO.getImageId());
+          produit.setImage(image);
         produitRepository.save(produit);
         return convertDTO(produit);
     }
@@ -69,6 +74,8 @@ public class ProduitService {
                     .orElseThrow(() -> new RuntimeException("Categorie not found"));
             produit.setCategorie(categorie);
         }
+        Image image=imageService.getImage(productDTO.getImageId());
+        produit.setImage(image);
 
         produit = produitRepository.save(produit);
         return convertDTO(produit);
