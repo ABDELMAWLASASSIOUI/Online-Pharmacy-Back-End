@@ -18,7 +18,7 @@ public class Produit {
     private String name;
     @Column(nullable = false)
     private double price;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)//changer this ligne lazy for eager
     @JoinColumn(name = "categorie_id", nullable = false)
     @JsonBackReference
     private Categorie categorie;

@@ -1,5 +1,7 @@
 package com.pharmacy_online_platforme.services;
 
+import com.pharmacy_online_platforme.dto.CategorieDTO;
+
 import com.pharmacy_online_platforme.entites.Categorie;
 import com.pharmacy_online_platforme.repositories.CategorieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +14,31 @@ import java.util.Optional;
 public class CategorieService {
     @Autowired
     private CategorieRepository categorieRepository;
-    public Categorie createCategorie(Categorie categorie){
-        return categorieRepository.save(categorie);
+    public CategorieDTO createCategorie(CategorieDTO categoryDTO){
+        System.out.println("Received CategoryDTO: " + categoryDTO);
+        Categorie categorie=new Categorie();
+        categorie.setName(categoryDTO.getName());
+        categorie = categorieRepository.save(categorie);
+        return convertDTO(categorie);
+
     }
-    public Categorie updateCategorie(Long id, Categorie categorie) {
+
+    private CategorieDTO convertDTO(Categorie categorie)
+    {
+        CategorieDTO dto = new CategorieDTO();
+        dto.setName(categorie.getName());
+        return dto;
+
+    }
+
+
+    public CategorieDTO updateCategorie(Long id, CategorieDTO categorieDTO) {
         Optional<Categorie> existingCategorie = categorieRepository.findById(id);
         if (existingCategorie.isPresent()) {
             Categorie updatedCategorie = existingCategorie.get();
-            updatedCategorie.setName(categorie.getName());
-            return categorieRepository.save(updatedCategorie);
+            updatedCategorie.setName(categorieDTO.getName());
+          categorieRepository.save(updatedCategorie);
+          return convertDTO(updatedCategorie);
         } else {
             throw new RuntimeException("Categorie not found with id: " + id);
         }
