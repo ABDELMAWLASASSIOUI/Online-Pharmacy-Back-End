@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
@@ -96,7 +97,18 @@ public class PanierController {
            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
        }
    }
-
+   //getPaniersByUserId
+   @GetMapping("/user/getPaniersByUserId/{id}")
+    public ResponseEntity<List<Panier>> getPaniersByUserId(@PathVariable Long id){
+       List<Panier> paniers=panierService.getPaniersByUserId(id);
+       return ResponseEntity.ok(paniers);
+   }
+    @PutMapping("/user/{panierId}/applyDiscount")
+    public ResponseEntity<Double> appliquerReduction(@PathVariable Long panierId,
+                                                     @RequestParam double pourcentageReduction) {
+        double totalAvecReduction = panierService.applyReduction(panierId, pourcentageReduction);
+        return ResponseEntity.ok(totalAvecReduction);
+    }
 
 
 }

@@ -13,6 +13,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -138,6 +139,23 @@ public Panier getPanierById(Long id) {
     }
     throw new RuntimeException("Panier not found");
 }
+
+
+    public List<Panier> getPaniersByUserId(Long userId) {
+        return panierRepository.findAllByUserId(userId);
+    }
+
+
+    public double applyReduction(Long panierId,double percentReduction){
+    Panier panier=panierRepository.findById(panierId).orElseThrow(()->new RuntimeException("the id of panier is not found"));
+      double total=panier.getTotalPrice();
+        double discountAmount = total * (percentReduction / 100);
+        double totalAvecReduction = total - discountAmount;
+        panier.setTotalPrice(totalAvecReduction);
+        panierRepository.save(panier);
+
+        return totalAvecReduction;
+    }
 
 
 

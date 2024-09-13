@@ -21,8 +21,13 @@ public class Panier {
     private User user;
     @OneToMany(mappedBy = "panier",cascade = CascadeType.ALL)
     private List<PanierItem> items;
+    @Transient
+    private double totalPrice;
     public double getTotalPrice() {
         return items.stream().mapToDouble(PanierItem::getTotalPrice).sum();
+    }
+    public void setTotalPrice() {
+        this.totalPrice = getTotalPrice(); // Recalcule le prix total
     }
 
 // @JsonManagedReference et @JsonBackReference sont utilisés ensemble pour éviter les boucles infinies dans les relations bidirectionnelles.
