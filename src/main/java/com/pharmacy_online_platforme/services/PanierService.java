@@ -157,6 +157,20 @@ public Panier getPanierById(Long id) {
         return totalAvecReduction;
     }
 
+    public double totalPriceCalculationWithDelivery(Long panierId)
+    {
+        Optional<Panier> optionalPanier=panierRepository.findById(panierId);
+        if (optionalPanier.isPresent()) {
+            Panier panier = optionalPanier.get();
+            double totalPriceAvecLivraison = panier.getTotalPriceAvecLivraison();
+            logger.info("Total price with delivery for Panier ID " + panierId + " is " + totalPriceAvecLivraison);
+            return totalPriceAvecLivraison;
+        } else {
+            logger.warning("Panier ID " + panierId + " not found.");
+            return 0.0;
+        }
+    }
+
 
 
     /*public Panier getPanierByIdN(Long panierId)

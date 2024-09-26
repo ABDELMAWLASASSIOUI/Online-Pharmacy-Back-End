@@ -109,6 +109,12 @@ public class PanierController {
         double totalAvecReduction = panierService.applyReduction(panierId, pourcentageReduction);
         return ResponseEntity.ok(totalAvecReduction);
     }
+    @GetMapping("/user/get/totalPriceWithDelivery/{id}")
+    public ResponseEntity<Double> getTotalPriceWithDelivery(@PathVariable Long id) {
+        logger.info("Calculating total price with delivery for Panier ID " + id);
+        double totalPriceWithDelivery = panierService.totalPriceCalculationWithDelivery(id);
+        return ResponseEntity.ok(totalPriceWithDelivery);
+    }
 
 
 }

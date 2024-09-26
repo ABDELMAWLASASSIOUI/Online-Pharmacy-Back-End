@@ -23,11 +23,16 @@ public class Panier {
     private List<PanierItem> items;
     @Transient
     private double totalPrice;
+    @Transient
+    private double fraisLivraison = 20.00;  // Exemple de frais de livraison fixe
     public double getTotalPrice() {
         return items.stream().mapToDouble(PanierItem::getTotalPrice).sum();
     }
     public void setTotalPrice() {
         this.totalPrice = getTotalPrice(); // Recalcule le prix total
+    }
+    public double getTotalPriceAvecLivraison() {
+        return getTotalPrice() + fraisLivraison;
     }
 
 // @JsonManagedReference et @JsonBackReference sont utilisés ensemble pour éviter les boucles infinies dans les relations bidirectionnelles.
