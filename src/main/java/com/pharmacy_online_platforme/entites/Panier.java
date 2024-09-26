@@ -2,6 +2,7 @@ package com.pharmacy_online_platforme.entites;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.pharmacy_online_platforme.Enum.PanierStatus;
+import com.pharmacy_online_platforme.Enum.PaymentMethod;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +30,11 @@ public class Panier {
 
     @Enumerated(EnumType.STRING)
     private PanierStatus status = PanierStatus.EN_COURS; // Nouveau statut ajou
+
+
+    @Enumerated(EnumType.STRING)
+    private PaymentMethod paymentMethod; // Type de paiement choisi
+
     public double getTotalPrice() {
         return items.stream().mapToDouble(PanierItem::getTotalPrice).sum();
     }
@@ -38,6 +44,7 @@ public class Panier {
     public double getTotalPriceAvecLivraison() {
         return getTotalPrice() + fraisLivraison;
     }
+
 
 // @JsonManagedReference et @JsonBackReference sont utilisés ensemble pour éviter les boucles infinies dans les relations bidirectionnelles.
     // @JsonManagedReference(value = "panier-panierItem")//éviter des boucles infinies lors de la sérialisation de relations parents-enfants dans les objets Java en JSON

@@ -1,5 +1,6 @@
 package com.pharmacy_online_platforme.dto;
 
+import com.pharmacy_online_platforme.entites.Panier;
 import lombok.Getter;
 import lombok.Setter;
 

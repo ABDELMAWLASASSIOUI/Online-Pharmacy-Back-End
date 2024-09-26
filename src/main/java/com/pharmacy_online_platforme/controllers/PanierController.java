@@ -1,5 +1,6 @@
 package com.pharmacy_online_platforme.controllers;
 
+import com.pharmacy_online_platforme.Enum.PaymentMethod;
 import com.pharmacy_online_platforme.dto.PanierDTO;
 import com.pharmacy_online_platforme.entites.Panier;
 import com.pharmacy_online_platforme.entites.PanierAddResquest;
@@ -125,6 +126,17 @@ public class PanierController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+
+    @PutMapping("/user/paiement/{panierId}")
+    public ResponseEntity<String> effectuerPaiementAvecChoix(@PathVariable Long panierId, @RequestParam PaymentMethod paymentMethod) {
+        try {
+            Panier panier = panierService.effectuerPaiementAvecChoix(panierId, paymentMethod);
+            return ResponseEntity.ok("Paiement effectué avec succès avec la méthode : " + paymentMethod);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
+    }
+
 
 
 

@@ -1,6 +1,7 @@
 package com.pharmacy_online_platforme.services;
 
 import com.pharmacy_online_platforme.Enum.PanierStatus;
+import com.pharmacy_online_platforme.Enum.PaymentMethod;
 import com.pharmacy_online_platforme.dto.PanierDTO;
 import com.pharmacy_online_platforme.entites.Panier;
 import com.pharmacy_online_platforme.entites.PanierItem;
@@ -182,8 +183,34 @@ public Panier getPanierById(Long id) {
             throw new IllegalStateException("Le panier ne peut pas être confirmé car il n'est pas en cours");
         }
     }
+    /*
+    @Transactional
+    public Panier effectuerPaiement(Long panierId) {
+        Panier panier = panierRepository.findById(panierId).orElseThrow(() -> new RuntimeException("Panier non trouvé"));
+        if (panier.getStatus() == PanierStatus.CONFIRME) {
+            panier.setStatus(PanierStatus.PAYE);
+            panierRepository.save(panier);
+            return panier;
+        } else {
+            throw new IllegalStateException("Le panier doit être confirmé avant le paiement");
+        }
+    }
+
+     */
 
 
+    @Transactional
+    public Panier effectuerPaiementAvecChoix(Long panierId, PaymentMethod paymentMethod) {
+        Panier panier = panierRepository.findById(panierId)
+                .orElseThrow(() -> new RuntimeException("Panier non trouvé"));
+        panier.setPaymentMethod(paymentMethod);
+        if (panier.getStatus() == PanierStatus.CONFIRME) {
+            panier.setStatus(PanierStatus.PAYE);
+            return panierRepository.save(panier);
+        } else {
+            throw new IllegalStateException("Le panier doit être confirmé avant le paiement");
+        }
+    }
 
     /*public Panier getPanierByIdN(Long panierId)
     {
