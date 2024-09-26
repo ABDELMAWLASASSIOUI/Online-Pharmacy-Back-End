@@ -1,5 +1,6 @@
 package com.pharmacy_online_platforme.services;
 
+import com.pharmacy_online_platforme.Enum.PanierStatus;
 import com.pharmacy_online_platforme.dto.PanierDTO;
 import com.pharmacy_online_platforme.entites.Panier;
 import com.pharmacy_online_platforme.entites.PanierItem;
@@ -168,6 +169,17 @@ public Panier getPanierById(Long id) {
         } else {
             logger.warning("Panier ID " + panierId + " not found.");
             return 0.0;
+        }
+    }
+    @Transactional
+    public Panier confirmerPanier(Long panierId) {
+        Panier panier = panierRepository.findById(panierId).orElseThrow(() -> new RuntimeException("Panier non trouvé"));
+        if (panier.getStatus() == PanierStatus.EN_COURS) {
+            panier.setStatus(PanierStatus.CONFIRME); // Mise à jour du statut du panier
+            panierRepository.save(panier);
+            return panier;
+        } else {
+            throw new IllegalStateException("Le panier ne peut pas être confirmé car il n'est pas en cours");
         }
     }
 

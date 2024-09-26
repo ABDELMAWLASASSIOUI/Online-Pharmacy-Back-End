@@ -1,6 +1,7 @@
 package com.pharmacy_online_platforme.entites;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.pharmacy_online_platforme.Enum.PanierStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +26,9 @@ public class Panier {
     private double totalPrice;
     @Transient
     private double fraisLivraison = 20.00;  // Exemple de frais de livraison fixe
+
+    @Enumerated(EnumType.STRING)
+    private PanierStatus status = PanierStatus.EN_COURS; // Nouveau statut ajou
     public double getTotalPrice() {
         return items.stream().mapToDouble(PanierItem::getTotalPrice).sum();
     }

@@ -116,5 +116,16 @@ public class PanierController {
         return ResponseEntity.ok(totalPriceWithDelivery);
     }
 
+    @PostMapping("/user/confirm/panier/{panierId}")
+    public ResponseEntity<String> confirmerPanier(@PathVariable Long panierId) {
+        try {
+            panierService.confirmerPanier(panierId);
+            return ResponseEntity.ok("Panier confirmé avec succès.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+
 
 }
