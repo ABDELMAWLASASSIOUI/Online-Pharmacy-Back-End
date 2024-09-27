@@ -24,6 +24,7 @@ public class User implements UserDetails {
     private Date birth_date;
     private String name;
     private String role;
+    private String numbertelphone;
     @OneToOne(mappedBy = "user")
     @JsonBackReference // Ajoutez cette ligne pour éviter une boucle infinie
     private Panier panier;
@@ -57,4 +58,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }

@@ -3,6 +3,7 @@ package com.pharmacy_online_platforme.services;
 import com.pharmacy_online_platforme.Enum.PanierStatus;
 import com.pharmacy_online_platforme.Enum.PaymentMethod;
 import com.pharmacy_online_platforme.dto.PanierDTO;
+import com.pharmacy_online_platforme.dto.PaymentInfoDTO;
 import com.pharmacy_online_platforme.entites.Panier;
 import com.pharmacy_online_platforme.entites.PanierItem;
 import com.pharmacy_online_platforme.entites.Produit;
@@ -199,18 +200,12 @@ public Panier getPanierById(Long id) {
      */
 
 
-    @Transactional
-    public Panier effectuerPaiementAvecChoix(Long panierId, PaymentMethod paymentMethod) {
-        Panier panier = panierRepository.findById(panierId)
-                .orElseThrow(() -> new RuntimeException("Panier non trouvé"));
-        panier.setPaymentMethod(paymentMethod);
-        if (panier.getStatus() == PanierStatus.CONFIRME) {
-            panier.setStatus(PanierStatus.PAYE);
-            return panierRepository.save(panier);
-        } else {
-            throw new IllegalStateException("Le panier doit être confirmé avant le paiement");
-        }
-    }
+
+
+
+
+
+
 
     /*public Panier getPanierByIdN(Long panierId)
     {

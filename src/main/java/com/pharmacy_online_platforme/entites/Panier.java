@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Collection;
 import java.util.List;
 
 @Getter
@@ -25,8 +26,13 @@ public class Panier {
     private List<PanierItem> items;
     @Transient
     private double totalPrice;
+
+
+    /*
     @Transient
     private double fraisLivraison = 20.00;  // Exemple de frais de livraison fixe
+
+     */
 
     @Enumerated(EnumType.STRING)
     private PanierStatus status = PanierStatus.EN_COURS; // Nouveau statut ajou
@@ -42,8 +48,10 @@ public class Panier {
         this.totalPrice = getTotalPrice(); // Recalcule le prix total
     }
     public double getTotalPriceAvecLivraison() {
-        return getTotalPrice() + fraisLivraison;
+        return getTotalPrice() ;// + fraisLivraison;
     }
+
+
 
 
 // @JsonManagedReference et @JsonBackReference sont utilisés ensemble pour éviter les boucles infinies dans les relations bidirectionnelles.
