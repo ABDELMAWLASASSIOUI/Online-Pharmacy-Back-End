@@ -67,6 +67,7 @@ public class LivraisonService {
             productDTO.setName(product.getProduit().getName());
             productDTO.setPrice(product.getProduit().getPrice());
 
+
             return productDTO;
         }).collect(Collectors.toList()));
 

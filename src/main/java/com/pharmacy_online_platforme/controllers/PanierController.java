@@ -1,6 +1,6 @@
 package com.pharmacy_online_platforme.controllers;
 
-import com.pharmacy_online_platforme.Enum.PaymentMethod;
+
 import com.pharmacy_online_platforme.dto.PanierDTO;
 import com.pharmacy_online_platforme.entites.Panier;
 import com.pharmacy_online_platforme.entites.PanierAddResquest;

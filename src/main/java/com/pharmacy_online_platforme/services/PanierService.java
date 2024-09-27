@@ -1,9 +1,7 @@
 package com.pharmacy_online_platforme.services;
 
 import com.pharmacy_online_platforme.Enum.PanierStatus;
-import com.pharmacy_online_platforme.Enum.PaymentMethod;
 import com.pharmacy_online_platforme.dto.PanierDTO;
-import com.pharmacy_online_platforme.dto.PaymentInfoDTO;
 import com.pharmacy_online_platforme.entites.Panier;
 import com.pharmacy_online_platforme.entites.PanierItem;
 import com.pharmacy_online_platforme.entites.Produit;
