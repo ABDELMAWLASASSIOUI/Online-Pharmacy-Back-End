@@ -11,10 +11,13 @@ import com.pharmacy_online_platforme.repositories.AuthRepo;
 import com.pharmacy_online_platforme.repositories.LivraisonRepository;
 import com.pharmacy_online_platforme.repositories.PanierRepository;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,6 +31,7 @@ public class LivraisonService {
 
     @Autowired
     private PanierRepository panierRepository;
+    private ModelMapper mapper=new ModelMapper();
 
     public LivraisonDTO createLivraison(Long panierId, String deliveryMethod) {
         Panier panier = panierRepository.findById(panierId)
@@ -81,5 +85,12 @@ public class LivraisonService {
         Livraison livraison = livraisonRepository.findById(livraisonId)
                 .orElseThrow(() -> new RuntimeException("Livraison non trouvée"));
         return convertToDTO(livraison);  // Convertir l'entité Livraison en DTO
+    }
+
+    public List<LivraisonDTO> getAllDeliveries() {
+        List<Livraison> livraisons = livraisonRepository.findAll();
+        return livraisons.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 }
