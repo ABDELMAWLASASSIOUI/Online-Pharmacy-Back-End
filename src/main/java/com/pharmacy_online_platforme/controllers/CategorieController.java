@@ -53,4 +53,9 @@ public class CategorieController {
         String message = "La catégorie avec l'ID " + id + " a été supprimée avec succès.";
         return new ResponseEntity<>(message,HttpStatus.OK); //noContent().build();
     }
+
+    @GetMapping("/admin/testing")
+    public String testing(){
+        return "juste testing";
+    }
 }
