@@ -72,6 +72,6 @@ public class CategorieController {
     }
     @GetMapping("/admin/testing5")
     public String testin5(){
-        return "juste testing";
+        return "justhhhhhhhhhhhhhhhhhh";
     }
 }
