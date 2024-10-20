@@ -58,4 +58,8 @@ public class CategorieController {
     public String testing(){
         return "juste testing";
     }
+    @GetMapping("/admin/testing2")
+    public String testing2(){
+        return "juste testing";
+    }
 }
