@@ -63,4 +63,8 @@ public class CategorieController {
     public String testingY(){
         return "juste testing end TT";
     }
+    @GetMapping("/admin/testingEndR")
+    public String testingGitlab(){
+        return "juste testing end TT";
+    }
 }
