@@ -54,22 +54,11 @@ public class CategorieController {
         return new ResponseEntity<>(message,HttpStatus.OK); //noContent().build();
     }
 
-    @GetMapping("/admin/testingEndRRR")
+    @GetMapping("/admin/hello")
     public String testing(){
-        return "juste testing end TT";
+        return "hello world";
     }
 
-    @GetMapping("/admin/testingEndR")
-    public String testingY(){
-        return "juste testing end TT";
-    }
-    @GetMapping("/admin/testingEndR")
-    public String testingGitlab(){
-        return "juste testing end TT";
-    }
-    @GetMapping("/admin/final")
-    public String testingfinal(){
-        return "juste testing for push ";
-    }
+
     
 }
