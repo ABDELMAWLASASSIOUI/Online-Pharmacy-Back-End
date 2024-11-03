@@ -67,4 +67,9 @@ public class CategorieController {
     public String testingGitlab(){
         return "juste testing end TT";
     }
+    @GetMapping("/admin/final")
+    public String testingfinal(){
+        return "juste testing for push ";
+    }
+    
 }
