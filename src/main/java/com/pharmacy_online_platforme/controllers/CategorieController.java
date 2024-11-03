@@ -58,9 +58,9 @@ public class CategorieController {
     public String testing(){
         return "hello world";
     }
-    @GetMapping("/admin/hello11")
+    @GetMapping("/admin/hello12")
     public String testing1(){
-        return "hello world11";
+        return "hello world12";
     }
 
     
