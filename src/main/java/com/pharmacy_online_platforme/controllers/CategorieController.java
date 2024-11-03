@@ -59,6 +59,11 @@ public class CategorieController {
         return "hello world final";
     }
 
+    @GetMapping("/admin/hellofinamljj")
+    public String testingj(){
+        return "hello world finalj";
+    }
+
 
     
 }
