@@ -54,18 +54,11 @@ public class CategorieController {
         return new ResponseEntity<>(message,HttpStatus.OK); //noContent().build();
     }
 
-    @GetMapping("/admin/hello")
+    @GetMapping("/admin/hellofinaml")
     public String testing(){
-        return "hello world";
+        return "hello world final";
     }
-    @GetMapping("/admin/hello12")
-    public String testing1(){
-        return "hello world12";
-    }
-    @GetMapping("/admin/hello124")
-    public String testing4(){
-        return "hello world124";
-    }
+
 
     
 }
