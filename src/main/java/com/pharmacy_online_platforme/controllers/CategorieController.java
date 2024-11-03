@@ -62,6 +62,10 @@ public class CategorieController {
     public String testing1(){
         return "hello world12";
     }
+    @GetMapping("/admin/hello124")
+    public String testing4(){
+        return "hello world124";
+    }
 
     
 }
