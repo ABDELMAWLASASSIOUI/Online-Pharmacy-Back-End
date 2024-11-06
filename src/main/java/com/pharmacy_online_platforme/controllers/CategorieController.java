@@ -65,5 +65,11 @@ public class CategorieController {
     }
 
 
+
+    @GetMapping("/admin/testing")
+    public String testingJenkins(){
+        return "buils project with jenkins";
+    }
+
     
 }
