@@ -74,7 +74,7 @@ public class CategorieController {
     @GetMapping("/admin/pipeline")
     public String testingJenkinsfinalpipline(){
         return "buils project with jenkins final pipleline";}
-    @GetMapping("/admin/addpipline")
+    @GetMapping("/admin/addpiplinewithoutstart")
     public String addpipline(){
-        return "add pipline";}
+        return "add pipline withoutstart";}
 }
