@@ -76,5 +76,5 @@ public class CategorieController {
         return "buils project with jenkins final pipleline";}
     @GetMapping("/admin/addpiplinewithoutstart2")
     public String addpipline(){
-        return "add pipline withoutstart3ZZZZZZ";}
+        return "add pipline withoutstart3ZZZZZZ";
 }
