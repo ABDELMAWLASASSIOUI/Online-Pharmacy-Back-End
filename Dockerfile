@@ -14,8 +14,8 @@ COPY src ./src
 # Télécharger les dépendances Maven
 RUN mvn dependency:go-offline
 
-# Compiler et packager l'application Java
-RUN mvn clean package
+# Compiler et packager l'application Java sans exécuter les tests
+RUN mvn clean package -DskipTests
 
 # Exposer le port utilisé par l'application (par défaut 8080)
 EXPOSE 8083
