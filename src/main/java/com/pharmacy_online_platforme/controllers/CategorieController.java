@@ -68,7 +68,7 @@ public class CategorieController {
 
     @GetMapping("/admin/testingfinal")
     public String testingJenkinsfinal(){
-        return "buils project with jenkins final";
+        return "buils project with jenkins final hhhhh";
     }
 
     
