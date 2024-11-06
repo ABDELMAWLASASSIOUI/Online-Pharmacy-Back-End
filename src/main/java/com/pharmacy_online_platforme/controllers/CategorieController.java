@@ -66,9 +66,9 @@ public class CategorieController {
 
 
 
-    @GetMapping("/admin/testingWorkspace")
+    @GetMapping("/admin/testinguselfpipeline")
     public String testingJenkinsfinal(){
-        return "buils project with jenkins final workspace";
+        return "buils project with jenkins final fpipeline";
     }
 
     
