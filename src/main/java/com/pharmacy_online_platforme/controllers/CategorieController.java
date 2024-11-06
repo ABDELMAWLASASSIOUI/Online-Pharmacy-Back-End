@@ -66,9 +66,9 @@ public class CategorieController {
 
 
 
-    @GetMapping("/admin/testing")
-    public String testingJenkins(){
-        return "buils project with jenkins";
+    @GetMapping("/admin/testingfinal")
+    public String testingJenkinsfinal(){
+        return "buils project with jenkins final";
     }
 
     
