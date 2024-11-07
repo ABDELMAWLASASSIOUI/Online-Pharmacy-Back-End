@@ -61,14 +61,14 @@ public class CategorieController {
 
     @GetMapping("/admin/hellofinamljj")
     public String testingj(){
-        return "hello world finalj";
+        return "hello world fina";
     }
 
 
 
     @GetMapping("/admin/pushimagetodockerhub")
     public String testingJenkinsfinal(){
-        return "push image to docker hub for testing cretensal";
+        return "push image to docker hub for testing cretensal final";
     }
 
 
