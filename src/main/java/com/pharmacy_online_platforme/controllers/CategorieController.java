@@ -66,9 +66,9 @@ public class CategorieController {
 
 
 
-    @GetMapping("/admin/testinguselfpipeline")
+    @GetMapping("/admin/pushimagetodockerhub")
     public String testingJenkinsfinal(){
-        return "buils project with jenkins final fpipeline";
+        return "push image to docker hub";
     }
 
 
