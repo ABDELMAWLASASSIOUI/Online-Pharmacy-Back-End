@@ -68,7 +68,7 @@ public class CategorieController {
 
     @GetMapping("/admin/pushimagetodockerhub")
     public String testingJenkinsfinal(){
-        return "push image to docker hub";
+        return "push image to docker hub for testing cretensal";
     }
 
 
