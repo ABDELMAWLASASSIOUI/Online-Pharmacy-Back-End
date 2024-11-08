@@ -68,7 +68,7 @@ public class CategorieController {
 
     @GetMapping("/admin/justbuilimage")
     public String testingJenkinsfinal(){
-        return "justbuilimage testing";
+        return "justbuilimage testing genrate code git par pipeline syntax";
     }
 
 
