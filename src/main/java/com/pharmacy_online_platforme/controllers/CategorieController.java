@@ -68,7 +68,7 @@ public class CategorieController {
 
     @GetMapping("/admin/justbuilimage")
     public String testingJenkinsfinal(){
-        return "justbuilimage";
+        return "justbuilimage testing";
     }
 
 
