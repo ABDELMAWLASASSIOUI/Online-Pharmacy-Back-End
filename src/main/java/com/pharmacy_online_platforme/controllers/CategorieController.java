@@ -68,7 +68,7 @@ public class CategorieController {
 
     @GetMapping("/admin/justbuilimage")
     public String testingJenkinsfinal(){
-        return "just builimage testing genrate code git par pipeline synta delete the name for check if true or false ";
+        return "just builimage testing genrate code git par pipeline synta delete the name for check if true or false forget the webhook ";
     }
 
 
