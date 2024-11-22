@@ -68,7 +68,7 @@ public class CategorieController {
 
     @GetMapping("/admin/update")
     public String testingJenkinsfinal(){
-        return "update the code for clean the code the first step and delete file";
+        return "the step for checked is build of code";
     }
 
 
