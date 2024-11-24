@@ -68,7 +68,7 @@ public class CategorieController {
 
     @GetMapping("/admin/update")
     public String testingJenkinsfinal(){
-        return "juste update the name of image docker  ";
+        return "juste testing if you delete the bac slash it nessary or not for the path GITHUB ";
     }
 
 
